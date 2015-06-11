@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
 /**
@@ -63,7 +66,6 @@ public class RoundPositionIndicator extends  AutoPlayGallery.PositionIndicator {
         unselectedCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         unselectedCirclePaint.setColor(unselectedColor);
     }
-
 
 
 
@@ -132,6 +134,31 @@ public class RoundPositionIndicator extends  AutoPlayGallery.PositionIndicator {
     }
 
 
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState =  super.onSaveInstanceState();
+
+        SavedState savedState = new SavedState(superState);
+        savedState.currentPosition = currentPosition;
+
+        return savedState;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (! (state instanceof SavedState)) {
+           super.onRestoreInstanceState(state);
+           return;
+        }
+
+        SavedState savedState = (SavedState) state;
+        super.onRestoreInstanceState(savedState.getSuperState());
+        currentPosition = savedState.currentPosition;
+    }
+
+
+
+
 
     //************************************************
     // Getter and Setters
@@ -197,4 +224,45 @@ public class RoundPositionIndicator extends  AutoPlayGallery.PositionIndicator {
         this.currentPosition = currentPosition;
         settingChanged = true;
     }
+
+
+
+    /**
+     * SavedState that used to save the currentPosition
+     */
+    public static class SavedState extends BaseSavedState {
+        int currentPosition;
+
+        SavedState(Parcelable superState) {
+            super(superState);
+        }
+        @Override
+        public void writeToParcel(@NonNull Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(currentPosition);
+        }
+
+        //Read back the values
+        private SavedState(Parcel in) {
+            super(in);
+            currentPosition = in.readInt();
+        }
+
+        @Override
+        public String toString() {
+            return "current position:" + currentPosition;
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR
+                = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+
+    }
+
 }
