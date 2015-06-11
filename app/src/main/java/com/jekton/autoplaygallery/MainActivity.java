@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         FrameLayout.LayoutParams layoutParams =
                 new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                                             ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
         layoutParams.bottomMargin = 4;
         gallery.setPositionIndicator(R.layout.widget_auto_play_gallery_indicator, layoutParams);
