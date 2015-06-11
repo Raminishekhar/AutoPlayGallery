@@ -102,7 +102,13 @@ public class AutoPlayGallery extends FrameLayout {
                 startPlay(2000);
                 break;
         }
-
+        /**
+         * In some case, say, in a DrawerLayout, the left-to-right drag will be intercepted by
+         * the parent, using {@link #requestDisallowInterceptTouchEvent(boolean)} to prevent this
+         * interception.<br />
+         * After this call, the <code>AutoPlayGallery</code> can then handle this event.
+         */
+        getParent().requestDisallowInterceptTouchEvent(true);
         return super.dispatchTouchEvent(ev);
     }
 
@@ -176,11 +182,11 @@ public class AutoPlayGallery extends FrameLayout {
     }
 
 
-    public AutoPlayGallery.OnImageClickedListener getOnImageClickedListener() {
+    public OnImageClickedListener getOnImageClickedListener() {
         return pagerAdapter.getOnImageClickedListener();
     }
 
-    public void setOnImageClickedListener(AutoPlayGallery.OnImageClickedListener onImageClickedListener) {
+    public void setOnImageClickedListener(OnImageClickedListener onImageClickedListener) {
         pagerAdapter.setOnImageClickedListener(onImageClickedListener);
     }
 
@@ -194,7 +200,7 @@ public class AutoPlayGallery extends FrameLayout {
      *                          <code>AutoPlayGallery.PositionIndicator</code>
      * @param layoutParams LayoutParams that used to set the position of the indicator
      */
-    public void setPositionIndicator(int indicatorLayoutID, FrameLayout.LayoutParams layoutParams) {
+    public void setPositionIndicator(int indicatorLayoutID, LayoutParams layoutParams) {
         ViewStub stub = (ViewStub) findViewById(R.id.widget_auto_play_gallery_indicator);
         stub.setLayoutResource(indicatorLayoutID);
 
