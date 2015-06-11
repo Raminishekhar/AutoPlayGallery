@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundPositionIndicator">
+        <attr name="my_selected_color" format="color|reference" />
+        <attr name="my_unselected_color" format="color|reference" />
+        <attr name="my_radius" format="dimension" />
+        <attr name="my_round_margin" format="dimension" />
+        <attr name="my_count" format="integer"/>
+        <attr name="my_selected" format="integer" />
+    </declare-styleable>
+</resources>

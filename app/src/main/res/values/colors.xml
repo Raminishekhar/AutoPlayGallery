@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="widget_auto_play_gallery_unselected_indicator">#FFF</color>
+    <color name="widget_auto_play_gallery_selected_indicator">#4b61d5</color>
+</resources>
